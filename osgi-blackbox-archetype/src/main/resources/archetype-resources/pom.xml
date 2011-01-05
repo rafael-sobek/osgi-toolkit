@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}</artifactId>
+    <version>${version}</version>
+    <packaging>bundle</packaging>
+    <name>${pom.groupId}.${pom.artifactId}</name>
+    <properties>
+        <org.osgi.core.version>1.4.0</org.osgi.core.version>
+        <org.ops4j.pax.logging.version>1.5.3</org.ops4j.pax.logging.version>
+        <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+        <org.apache.felix.configadmin.version>1.2.4</org.apache.felix.configadmin.version>
+        <aop.alliance.version>1.0.0</aop.alliance.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>${org.osgi.core.version}</version>
+            <!-- will be provided be osgi runtime -->
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-api</artifactId>
+            <version>${org.ops4j.pax.logging.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc-portlet</artifactId>
+            <version>${org.springframework.version}</version>
+            <!-- will be provided be osgi runtime -->
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <!-- http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <instructions>
+                                <Bundle-Description>${pom.name}</Bundle-Description>
+                                <Bundle-Description>${pom.description}</Bundle-Description>
+                                <Bundle-Description>${pom.version}</Bundle-Description>
+                                <!-- if no usage of service depedency management (e.g. spring dm, ds, ipojo, ...) -->
+                                <!-- Bundle-Activator>${pom.groupId}.${pom.artifactId}.api.Activator</Bundle-Activator-->
+                                <!-- import package convention, share only bundles, that will be used by more than one bundle -->
+                                <Import-Package>
+                                    org.osgi.framework,
+                                    org.osgi.service.log,
+                                    org.slf4j,
+                                    org.apache.log4j,
+                                    org.apache.commons.logging,
+                                    <!-- further shared osgi dependencies or imported services -->
+                                    !*
+                                </Import-Package>
+                                <!-- export package convention -->
+                                <Export-Package>${pom.groupId}.${pom.artifactId}.api,!*</Export-Package>
+                                <!-- private package convention -->
+                                <Private-Package>${pom.groupId}.${pom.artifactId}.impl.*</Private-Package>
+                                <!-- blackbox, embed all not shared dependencies, because of complexity -->
+                                <Embed-Dependency>*;scope=compile|runtime|system</Embed-Dependency>
+                                <Embed-Transitive>true</Embed-Transitive>
+                                <_failok>true</_failok>
+                            </instructions>
+                        </configuration>
+                    </execution>
+                </executions>
+                <!--configuration>
+                    <supportedProjectTypes>
+                        <supportedProjectType>bundle</supportedProjectType>
+                        <supportedProjectType>jar</supportedProjectType>
+                        <supportedProjectType>war</supportedProjectType>
+                    </supportedProjectTypes>
+                </configuration-->
+            </plugin>
+            <plugin>
+                <groupId>org.ops4j</groupId>
+                <artifactId>maven-pax-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <noDependencies>true</noDependencies>
+                    <provision>
+                        <!-- debugging osgi runtime -->
+                        <!--param>- -vmOptions=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</param-->
+                        <param>--platform=felix</param>
+                        <param>--version=3.0.2</param>
+                        <!-- all standard classes will be delegated to java vm, less complexity -->
+                        <param>--bootdelegation=java.*,sun.*,org.xml.*,org.w3c.*,com.sun.*,javax.*</param>
+                        <!--param>- -profiles=spring.dm</param-->
+                        <param>mvn:org.osgi/org.osgi.compendium/4.2.0</param>
+                        <param>mvn:org.apache.felix/org.apache.felix.configadmin/${org.apache.felix.configadmin.version}</param>
+                        <param>mvn:org.ops4j.pax.logging/pax-logging-api/${org.ops4j.pax.logging.version}</param>
+                        <param>mvn:org.ops4j.pax.logging/pax-logging-service/${org.ops4j.pax.logging.version}</param>
+                        <!-- if you are using spring dm dependency resolution -->
+                        <param>mvn:http://repository.springsource.com/maven/bundles/external!org.objectweb.asm/com.springsource.org.objectweb.asm/2.2.3</param>
+                        <param>mvn:http://repository.springsource.com/maven/bundles/external!net.sourceforge.cglib/com.springsource.net.sf.cglib/2.1.3</param>
+                        <param>mvn:http://maven.springframework.org/milestone!org.springframework.osgi/spring-osgi-annotation/2.0.0.M1</param>
+                        <param>mvn:http://maven.springframework.org/milestone!org.springframework.osgi/spring-osgi-core/2.0.0.M1</param>
+                        <param>mvn:http://maven.springframework.org/milestone!org.springframework.osgi/spring-osgi-extender/2.0.0.M1</param>
+                        <param>mvn:http://maven.springframework.org/milestone!org.springframework.osgi/spring-osgi-io/2.0.0.M1</param>
+                        <param>mvn:org.springframework/spring-aop/${org.springframework.version}</param>
+                        <param>mvn:http://repository.springsource.com/maven/bundles/external!org.aopalliance/com.springsource.org.aopalliance/${aop.alliance.version}</param>
+                        <param>mvn:org.springframework/spring-asm/${org.springframework.version}</param>
+                        <param>mvn:org.springframework/spring-beans/${org.springframework.version}</param>
+                        <param>mvn:org.springframework/spring-context/${org.springframework.version}</param>
+                        <param>mvn:org.springframework/spring-context-support/${org.springframework.version}</param>
+                        <param>mvn:org.springframework/spring-core/${org.springframework.version}</param>
+                        <param>mvn:org.springframework/spring-expression/${org.springframework.version}</param>
+                    </provision>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
