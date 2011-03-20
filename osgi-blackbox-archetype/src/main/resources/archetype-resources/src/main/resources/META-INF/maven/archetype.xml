@@ -3,12 +3,12 @@
   xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0 http://maven.apache.org/xsd/archetype-1.0.0.xsd">
     <id>blackbox.spring.dm.archetype</id>
     <allowPartial>true</allowPartial>
-    <sources>
+    <!--sources>
         <source>src/main/java/org/developers/blog/osgi/blackbox/api/IBlackBoxService.java</source>
         <source>src/main/java/org/developers/blog/osgi/blackbox/impl/BlackBoxService.java</source>
     </sources>
     <resources>
         <resource>src/main/resources/META-INF/spring/bundle-context.xml</resource>
         <resource>src/main/resources/META-INF/spring/bundle-context-osgi.xml</resource>
-    </resources>
+    </resources-->
 </archetype>
