@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 public class HttpServiceTrackerCustomizer extends AddServiceEventListener implements ServiceTrackerCustomizer {
     private Logger log = LoggerFactory.getLogger(HttpServiceTrackerCustomizer.class);
 
-    private final static String rootPath = "/webservices/rest";
+    private final static String rootPath = "/resources";
 
     private BundleContext bundleContext;
 
