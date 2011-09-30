@@ -145,7 +145,7 @@
                                     !*
                         </Import-Package>
                         <Include-Resource>@cxf-rt-core-2.2.10.jar!/META-INF/cxf/*</Include-Resource>
-                        <Export-Package>org.developers.blog.osgi.webservice.jaxrs.api,javax.ws.rs.core,javax.ws.rs</Export-Package>
+                        <Export-Package>org.developers.blog.osgi.webservice.jaxrs.api,javax.ws.rs.core,javax.ws.rs,javax.ws.rs.ext</Export-Package>
                         <Embed-Dependency>*;scope=compile|runtime|system</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                     </instructions>

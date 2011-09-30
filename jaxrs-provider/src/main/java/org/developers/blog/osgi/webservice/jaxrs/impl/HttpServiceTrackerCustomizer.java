@@ -35,7 +35,7 @@ public class HttpServiceTrackerCustomizer extends AddServiceEventListener implem
         try {
             httpService = (HttpService) bundleContext.getService(reference);
             if (cxfServlet == null) cxfServlet = new CXFNonSpringServlet();
-            httpService.registerServlet("/webservices/rest", cxfServlet, new Hashtable<String, String>(), null);
+            httpService.registerServlet("/resources", cxfServlet, new Hashtable<String, String>(), null);
             serviceEventListener.stateChanged(ServiceStateListener.ADD_CXF_BUS, cxfServlet.getBus());
             
         } catch (Exception ex) {
@@ -51,7 +51,7 @@ public class HttpServiceTrackerCustomizer extends AddServiceEventListener implem
 
     @Override
     public void removedService(ServiceReference reference, Object service) {
-        if (httpService != null) httpService.unregister("/webservices/rest");
+        if (httpService != null) httpService.unregister("/resources");
         serviceEventListener.stateChanged(ServiceStateListener.REMOVE_CXF_BUS, null);
         cxfServlet.destroy();
         cxfServlet = null;
