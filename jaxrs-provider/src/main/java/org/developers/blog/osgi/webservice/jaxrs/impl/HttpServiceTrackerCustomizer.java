@@ -4,6 +4,7 @@
  */
 package org.developers.blog.osgi.webservice.jaxrs.impl;
 
+import java.util.Dictionary;
 import java.util.Hashtable;
 import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
 import org.osgi.framework.BundleContext;
@@ -20,7 +21,7 @@ import org.slf4j.LoggerFactory;
 public class HttpServiceTrackerCustomizer extends AddServiceEventListener implements ServiceTrackerCustomizer {
     private Logger log = LoggerFactory.getLogger(HttpServiceTrackerCustomizer.class);
 
-    private final static String rootPath = "/resources";
+    private final static String rootPath = "/rest";
 
     private BundleContext bundleContext;
 
@@ -36,7 +37,9 @@ public class HttpServiceTrackerCustomizer extends AddServiceEventListener implem
         try {
             httpService = (HttpService) bundleContext.getService(reference);
             if (cxfServlet == null) cxfServlet = new CXFNonSpringServlet();
-            httpService.registerServlet(rootPath, cxfServlet, new Hashtable<String, String>(), null);
+            Dictionary props = new Hashtable();
+            props.put("servlet-name", "jaxrs-provider");
+            httpService.registerServlet(rootPath, cxfServlet, props, null);
             serviceEventListener.stateChanged(ServiceStateListener.ADD_CXF_BUS, cxfServlet.getBus());
             
         } catch (Exception ex) {
