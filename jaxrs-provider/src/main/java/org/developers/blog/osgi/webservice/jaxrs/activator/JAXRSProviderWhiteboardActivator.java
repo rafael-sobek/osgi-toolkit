@@ -68,6 +68,7 @@ public class JAXRSProviderWhiteboardActivator implements BundleActivator {
                 HttpServletResponse response = (HttpServletResponse)sr1;
                 response.addHeader("Access-Control-Allow-Origin", "*");
                 response.addHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+                fc.doFilter(sr, sr1);
             }
 
             @Override
