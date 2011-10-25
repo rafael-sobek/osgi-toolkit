@@ -162,7 +162,7 @@
                     <noDependencies>true</noDependencies>
                     <provision>
                         <!-- debugging osgi runtime -->
-                        <param>--vmOptions=-Dorg.ops4j.pax.logging.DefaultServiceLog.level=DEBUG -Dfelix.log.level=4 -Dorg.apache.felix.http.jettyEnabled=true -Dorg.apache.felix.http.jettyEnabled=true -Dorg.apache.felix.http.whiteboardEnabled=true -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</param>
+                        <param>--vmOptions=-Dorg.ops4j.pax.logging.DefaultServiceLog.level=DEBUG -Dfelix.log.level=4 -Dorg.apache.felix.http.jettyEnabled=true -Dorg.apache.felix.http.jettyEnabled=true -Dorg.apache.felix.http.whiteboardEnabled=true -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</param>                        
                         <param>--platform=felix</param>
                         <param>--version=3.0.2</param>
                         <!-- all standard classes will be delegated to java vm, less complexity -->
