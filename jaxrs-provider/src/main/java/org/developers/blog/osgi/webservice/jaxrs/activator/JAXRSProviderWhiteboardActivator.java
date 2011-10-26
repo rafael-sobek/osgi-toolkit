@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import org.developers.blog.osgi.webservice.jaxrs.impl.HttpServiceTrackerCustomizer;
 import org.developers.blog.osgi.webservice.jaxrs.impl.RestProviderServiceTrackerCustomizer;
 import org.developers.blog.osgi.webservice.jaxrs.impl.ServiceStateListener;
@@ -66,9 +67,15 @@ public class JAXRSProviderWhiteboardActivator implements BundleActivator {
             @Override
             public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
                 HttpServletResponse response = (HttpServletResponse)sr1;
-                response.addHeader("Access-Control-Allow-Origin", "*");
-                response.addHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE");
-                response.addHeader("Access-Control-Allow-Headers", "Content-Type,Accept");
+                HttpServletRequest request = (HttpServletRequest)sr;
+                String origin = request.getHeader("Origin");
+                if (origin != null) {
+                    response.addHeader("Access-Control-Allow-Origin", origin);
+                    response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE, PUT");
+                    response.addHeader("Access-Control-Allow-Headers", "Content-Type, Auth-Session-Id");
+                    response.addHeader("Access-Control-Max-Age", "86400");
+                }
+
                 fc.doFilter(sr, sr1);
             }
 
