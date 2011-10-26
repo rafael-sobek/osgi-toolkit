@@ -67,7 +67,7 @@ public class JAXRSProviderWhiteboardActivator implements BundleActivator {
             public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
                 HttpServletResponse response = (HttpServletResponse)sr1;
                 response.addHeader("Access-Control-Allow-Origin", "*");
-                response.addHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE");
+                response.addHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE,OPTIONS");
                 response.addHeader("Access-Control-Allow-Header", "Content-Type,Accept,Auth-Session-Id");
                 fc.doFilter(sr, sr1);
             }
