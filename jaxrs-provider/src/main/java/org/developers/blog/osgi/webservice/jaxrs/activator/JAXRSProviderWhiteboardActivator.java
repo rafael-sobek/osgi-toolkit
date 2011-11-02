@@ -24,12 +24,15 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.http.HttpService;
 import org.osgi.util.tracker.ServiceTracker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author rafsob
  */
 public class JAXRSProviderWhiteboardActivator implements BundleActivator {
+    private Logger log = LoggerFactory.getLogger(HttpServiceTrackerCustomizer.class);
 
     private ServiceTracker restServiceProviderTracker;
     private ServiceTracker httpServiceTracker;
@@ -70,8 +73,9 @@ public class JAXRSProviderWhiteboardActivator implements BundleActivator {
                 HttpServletRequest request = (HttpServletRequest)sr;
                 String origin = request.getHeader("Origin");
                 if (origin != null) {
+                    log.info("CORS Handling on. Origin is " + origin);
                     response.addHeader("Access-Control-Allow-Origin", origin);
-                    response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE, PUT");
+                    response.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE, PUT, HEAD");
                     response.addHeader("Access-Control-Allow-Headers", "Content-Type, Auth-Session-Id");
                     response.addHeader("Access-Control-Max-Age", "86400");
                 }
