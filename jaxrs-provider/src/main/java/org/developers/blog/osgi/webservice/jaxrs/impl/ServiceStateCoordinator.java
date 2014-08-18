@@ -11,6 +11,8 @@ import org.apache.cxf.Bus;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
+import org.apache.cxf.transport.common.gzip.GZIPInInterceptor;
+import org.apache.cxf.transport.common.gzip.GZIPOutInterceptor;
 import org.developers.blog.osgi.webservice.jaxrs.api.JAXRSProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +43,8 @@ public class ServiceStateCoordinator {
         factory.setAddress(restProvider.getAlias());
         factory.setResourceClasses(restProvider.getService().getClass());
         factory.setResourceProvider(restProvider.getService().getClass(), new SingletonResourceProvider(restProvider.getService()));
-        
+        factory.getInInterceptors().add(new GZIPInInterceptor());
+        factory.getOutInterceptors().add(new GZIPOutInterceptor());
         ClassLoader bundleClassLoader =
                 Thread.currentThread().getContextClassLoader();
         ClassLoader delegateClassLoader =
